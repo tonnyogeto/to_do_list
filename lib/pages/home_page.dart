@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:to_do_list/data/database.dart';
 import 'package:to_do_list/util/dialog_box.dart';
 import 'package:to_do_list/util/todo_tile.dart';
@@ -14,8 +15,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //reference the hive box
-  final _myBox =Hive.openBox('mybox');
-  ToDoDataBased db =ToDoDataBase();
+  final _myBox =Hive.box('mybox');
+  ToDoDataBase db =ToDoDataBase();
 
   @override
   void initState() {
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   void checkBoxChanged(bool? value, int index){
     setState(() {
       
-      db.toDoList[index][1]=! db.toDoList[index][1];
+      db.toDoList[index][1]= !db.toDoList[index][1];
     });
 
     db.updateDateBase();
